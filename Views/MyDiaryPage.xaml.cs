@@ -36,11 +36,15 @@ namespace FitTracker.Views
             this.mainFrame = mainFrame;
             this.pageFactory = pageFactory;
             this.menuBarViewModel = menuBarViewModel;
-            
+
             menuBarViewModel.SetActivePage(ActivePage.Diary);
-            this.DataContext = menuBarViewModel;
+
+            this.DataContext = new MyDiaryPageViewModel(menuBarViewModel);
+
 
             AttachEventHandlers();
+
+
 
         }
 
@@ -61,6 +65,9 @@ namespace FitTracker.Views
             };
         }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Heeloo");
+        }
     }
 }
