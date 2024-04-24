@@ -40,15 +40,16 @@ namespace FitTracker.Views
             var loginPage = pageFactory.CreateLoginPage();
             var registrationPage = pageFactory.CreateRegistrationPage(); // Asumuojame, kad ši funkcija yra sukurta
             var registrationFillForm = pageFactory.CreateRegistrationFillForm(); // Asumuojame, kad ši funkcija yra sukurta
+            var myDiaryPage = pageFactory.CreateMyDiaryPage();
 
             // Prisegti įvykių tvarkytojus
-            InitializeEventHandlers(loginPage, registrationPage, registrationFillForm);
+            InitializeEventHandlers(loginPage, registrationPage, registrationFillForm, myDiaryPage);
 
             // Parodyti pradinį puslapį
             MainFrame.Navigate(loginPage);
         }
 
-        private void InitializeEventHandlers(LoginPage loginPage, RegistrationPage registrationPage, RegistrationFillForm registrationFillForm)
+        private void InitializeEventHandlers(LoginPage loginPage, RegistrationPage registrationPage, RegistrationFillForm registrationFillForm, MyDiaryPage myDiaryPage)
         {
             // LoginPage įvykių tvarkytojai
             loginPage.OnLoginSuccess += () => MainFrame.Navigate(pageFactory.CreateMyDiaryPage());
@@ -60,6 +61,9 @@ namespace FitTracker.Views
 
             // RegistrationFillForm įvykių tvarkytojas
             registrationFillForm.OnSubmit += () => MainFrame.Navigate(pageFactory.CreateMyDiaryPage());
+
+            myDiaryPage.onAddDayClick += () => MainFrame.Navigate(pageFactory.CreateAddDayPage());
+
         }
     }
 }

@@ -18,6 +18,7 @@ namespace FitTracker.Views
         private MyDiaryPage myDiaryPage;
         private RegistrationPage registrationPage;
         private RegistrationFillForm registrationFillForm;
+        private AddDayPage addDayPage;
 
         public PageFactory(Frame mainFrame, MenuBarViewModel menuBarViewModel)
         {
@@ -39,6 +40,11 @@ namespace FitTracker.Views
         public LoginPage CreateLoginPage()
         {
             return loginPage ?? (loginPage = new LoginPage());
+        }
+
+        public AddDayPage CreateAddDayPage()
+        {
+            return addDayPage ?? (addDayPage = new AddDayPage());
         }
 
         public DashboardPage CreateDashboardPage()

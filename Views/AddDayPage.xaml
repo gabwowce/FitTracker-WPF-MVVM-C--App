@@ -1,0 +1,122 @@
+﻿<Page x:Class="FitTracker.Views.AddDayPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FitTracker.Views"
+      xmlns:userControls="clr-namespace:FitTracker.Views.UserControls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddDayPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Margin="5,0" Text="2024 April" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <xctk:WatermarkTextBox Grid.Column="0" Watermark="Enter Weight" x:Name="WghtrBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="1" Watermark="Enetr Kcal" x:Name="kcalBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="2" Watermark="Enetr Water" x:Name="waterlBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="3" Watermark="Enetr Sleep hours" x:Name="sleeplBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Background="#ebe7ff">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition  Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Physical Activity" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                    <userControls:MyCustomToggleButton x:Name="yogaButt" ButtonContent="Yoga" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="runButt" ButtonContent="Running" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="gymButt" ButtonContent="Gym" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="SwimButt" ButtonContent="Swimming" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="walkButt" ButtonContent="Waliking" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="teamButt" ButtonContent="Team Sports" Margin="5"/>
+
+                    <userControls:MyCustomToggleButton x:Name="cycmButt" ButtonContent="Cycling" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="danceButt" ButtonContent="Dancing" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="balanceButt" ButtonContent="Balance" Margin="5"/>
+                </WrapPanel>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Mood" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                    <userControls:MyCustomToggleButton x:Name="calmButt" ButtonContent="Calm" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="happyButt" ButtonContent="Happy" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="energButt" ButtonContent="Energetic" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="friskButt" ButtonContent="Frisky" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="sadButt" ButtonContent="Sad" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="depressButt" ButtonContent="Depressed" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="confuButt" ButtonContent="Confused" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="irritatedButt" ButtonContent="Irritated" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="lowenerdButt" ButtonContent="Low Energy" Margin="5"/>
+                </WrapPanel>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="3" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Other" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                <userControls:MyCustomToggleButton x:Name="travelButt" ButtonContent="Travel" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="StressButt" ButtonContent="Stress" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="MedButt" ButtonContent="Meditation" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="injurykButt" ButtonContent="Desease or Injury" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="alcoButt" ButtonContent="Alcochol" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="socialActivityButt" ButtonContent="Social Activity" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="cookingButt" ButtonContent="Cooking" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="workloadButt" ButtonContent="Workload" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="healthyEatingButt" ButtonContent="Healthy Eating" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="sunExposureButt" ButtonContent="Sun Exposure" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="readingButt" ButtonContent="Reading" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="relaxationButt" ButtonContent="Relaxation" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="creativeActivitiesButt" ButtonContent="Creative Activities" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="petCareButt" ButtonContent="Pet Care" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="learningNewSkillsButt" ButtonContent="Learning New Skills" Margin="5"/>
+
+            </WrapPanel>
+
+        </Grid>
+
+        <xctk:WatermarkTextBox Grid.Row="4" Watermark="Write a note.." x:Name="noteBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="545" Height="40" Margin="10,0"/>
+        <Button Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Done" Width="200" Margin="20,0" Background="#BFB2FF" Foreground="#5800AA" Height="40"/>
+
+    </Grid>
+</Page>

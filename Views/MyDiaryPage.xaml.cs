@@ -69,5 +69,11 @@ namespace FitTracker.Views
         {
             MessageBox.Show("Heeloo");
         }
+        public event Action onAddDayClick;
+
+        private void AddDayButt(object sender, RoutedEventArgs e)
+        {
+            onAddDayClick?.Invoke();
+        }
     }
 }
