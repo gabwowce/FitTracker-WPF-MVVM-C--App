@@ -67,13 +67,39 @@ namespace FitTracker.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Heeloo");
+            var button = sender as Button;
+            var dayInfo = button.CommandParameter as DayInfo; // 'DayInfo' yra klasė, kurią naudojate savo WeekDays sąraše.
+
+            if (dayInfo != null)
+            {
+                // Naviguoja į AddDayPage su paspaustos dienos data
+                var addDayPage = pageFactory.CreateAddDayPage(dayInfo.TodayDate);
+                mainFrame.Navigate(addDayPage);
+            }
         }
+
+        private void OpenAddDayPageWithCurrentDate(object sender, RoutedEventArgs e)
+        {
+            var todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+            var addDayPage = pageFactory.CreateAddDayPage(todayDate);
+            mainFrame.Navigate(addDayPage);
+        }
+
+/*        private void OpenAddDayPageWithCurrentDate()
+        {
+            // Naviguoja į AddDayPage su šiandienos data
+            var todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+            var addDayPage = pageFactory.CreateAddDayPage(todayDate);
+            mainFrame.Navigate(addDayPage);
+        }*/
+
         public event Action onAddDayClick;
 
         private void AddDayButt(object sender, RoutedEventArgs e)
         {
             onAddDayClick?.Invoke();
         }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -19,6 +20,7 @@ namespace FitTracker.Views
         private RegistrationPage registrationPage;
         private RegistrationFillForm registrationFillForm;
         private AddDayPage addDayPage;
+        private string TodayDate { get; set; }
 
         public PageFactory(Frame mainFrame, MenuBarViewModel menuBarViewModel)
         {
@@ -42,9 +44,10 @@ namespace FitTracker.Views
             return loginPage ?? (loginPage = new LoginPage());
         }
 
-        public AddDayPage CreateAddDayPage()
+        public AddDayPage CreateAddDayPage(string date)
         {
-            return addDayPage ?? (addDayPage = new AddDayPage());
+            // Sukuria AddDayPage su perduota data
+            return new AddDayPage(date);
         }
 
         public DashboardPage CreateDashboardPage()

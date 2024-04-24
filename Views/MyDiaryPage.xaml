@@ -41,7 +41,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
 
-                            <Button BorderThickness="0" Background="Transparent" Click="Button_Click">
+                            <Button BorderThickness="0" Background="Transparent" Click="Button_Click" CommandParameter="{Binding}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Foreground" Value="Black"/>
@@ -85,7 +85,7 @@
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="2024-04-23" FontSize="12" FontWeight="DemiBold" Foreground="#D7D7D7"/>
+                <TextBlock Grid.Row="0" Text="{Binding TodayDate}" FontSize="12" FontWeight="DemiBold" Foreground="#D7D7D7"/>
 
                 <Grid Grid.Row="1" Margin="0,5">
                     <Grid.RowDefinitions>
@@ -144,7 +144,7 @@
                     
                 </Grid>
 
-                <Button Grid.Row="1" Height="20" Width="150" Background="#BFB2FF" Content="+ ADD DAY" Click="AddDayButt"/>
+                <Button Grid.Row="1" Height="20" Width="150" Background="#BFB2FF" Content="+ ADD DAY" Click="OpenAddDayPageWithCurrentDate"/>
             </Grid>
 
             <userControls:DailyStatsControl x:Name="stats" Grid.Row="3"/>

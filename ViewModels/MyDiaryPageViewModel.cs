@@ -14,12 +14,14 @@ namespace FitTracker.ViewModels
         public string WeekDay { get; set; }
 
         public Brush FontColor { get; set; }
+        public string TodayDate { get; set; }
 
     }
 
     public class MyDiaryPageViewModel : INotifyPropertyChanged
 
     {
+        public string TodayDate { get; set; }
         private string _currentMonthYear;
         public string CurrentMonthYear
         {
@@ -52,6 +54,7 @@ namespace FitTracker.ViewModels
             
             MenuBar = menuBarViewModel;
             CurrentMonthYear = DateTime.Now.ToString("yyyy MMMM");
+            TodayDate = DateTime.Now.ToString("yyyy-MM-dd");
             GenerateWeekDays();
         }
 

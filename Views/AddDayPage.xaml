@@ -19,8 +19,8 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" Margin="5,0" Text="2024 April" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="0" Margin="5,0" Text="{Binding date}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
