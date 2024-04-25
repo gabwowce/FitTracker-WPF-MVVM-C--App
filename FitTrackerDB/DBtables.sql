@@ -67,3 +67,51 @@ CREATE TABLE UserEvents (
     FOREIGN KEY (LogID) REFERENCES DailyLogs(LogID),
     FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
+
+
+
+
+
+
+
+
+INSERT INTO Activities (ActivityName) VALUES
+('Yoga'),
+('Running'),
+('Gym'),
+('Swimming'),
+('Walking'),
+('Team Sports'),
+('Cycling'),
+('Dancing'),
+('Balance');
+
+INSERT INTO Moods (MoodDescription) VALUES
+('Calm'),
+('Happy'),
+('Energetic'),
+('Frisky'),
+('Sad'),
+('Depressed'),
+('Confused'),
+('Irritated'),
+('Low Energy');
+
+
+INSERT INTO Events (EventName) VALUES
+('Travel'),
+('Stress'),
+('Meditation'),
+('Disease or Injury'),
+('Alcohol'),
+('Social Activity'),
+('Cooking'),
+('Workload'),
+('Healthy Eating'),
+('Sun Exposure'),
+('Reading'),
+('Relaxation'),
+('Creative Activities'),
+('Pet Care'),
+('Learning New Skills');
+
