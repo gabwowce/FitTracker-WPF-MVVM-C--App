@@ -41,7 +41,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
 
-                            <Button BorderThickness="0" Background="Transparent" Click="Button_Click" CommandParameter="{Binding}">
+                            <Button BorderThickness="0" Background="Transparent" CommandParameter="{Binding}" Click="CalendarButt">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Foreground" Value="Black"/>

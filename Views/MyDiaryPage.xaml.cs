@@ -63,9 +63,11 @@ namespace FitTracker.Views
                 this.menuBarViewModel.SetActivePage(ActivePage.Profile);
                 mainFrame.Navigate(pageFactory.CreateProfilePage());
             };
+
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CalendarButt(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             var dayInfo = button.CommandParameter as DayInfo; // 'DayInfo' yra klasė, kurią naudojate savo WeekDays sąraše.
@@ -73,25 +75,24 @@ namespace FitTracker.Views
             if (dayInfo != null)
             {
                 // Naviguoja į AddDayPage su paspaustos dienos data
-                var addDayPage = pageFactory.CreateAddDayPage(dayInfo.TodayDate);
+                var addDayPage = pageFactory.CreateAddDayPage(dayInfo.MonthDay);
                 mainFrame.Navigate(addDayPage);
+                NavigateBackToMain(addDayPage);
             }
         }
 
         private void OpenAddDayPageWithCurrentDate(object sender, RoutedEventArgs e)
         {
-            var todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+            var todayDate = DateTime.Now.ToString("MMMM dd");
             var addDayPage = pageFactory.CreateAddDayPage(todayDate);
             mainFrame.Navigate(addDayPage);
+            NavigateBackToMain(addDayPage);
         }
 
-/*        private void OpenAddDayPageWithCurrentDate()
+        private void NavigateBackToMain(AddDayPage addDayPage)
         {
-            // Naviguoja į AddDayPage su šiandienos data
-            var todayDate = DateTime.Now.ToString("yyyy-MM-dd");
-            var addDayPage = pageFactory.CreateAddDayPage(todayDate);
-            mainFrame.Navigate(addDayPage);
-        }*/
+            addDayPage.onCancelAddDay += () => mainFrame.Navigate(this);
+        }
 
         public event Action onAddDayClick;
 

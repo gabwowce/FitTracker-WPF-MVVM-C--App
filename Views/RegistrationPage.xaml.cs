@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTracker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,13 @@ namespace FitTracker.Views
 {
     public partial class RegistrationPage : Page
     {
-        public RegistrationPage()
+        private RegistrationViewModel registrationViewModel;
+        public RegistrationPage(RegistrationViewModel viewModel)
         {
             InitializeComponent();
-           
+            registrationViewModel = viewModel;  
+            this.DataContext = registrationViewModel;
+
         }
 
 
@@ -34,7 +38,26 @@ namespace FitTracker.Views
 
         private void CompleteRegistration(object sender, RoutedEventArgs e)
         {
-            OnRegistrationSuccess?.Invoke();
+            var password = PasswordBox.Password;
+            var confirmPassword = RepeatPasswordBox.Password;
+
+            registrationViewModel.Password = password;
+            registrationViewModel.ConfirmPassword = confirmPassword;
+
+            if (registrationViewModel.IsValidInitial())
+            {
+                OnRegistrationSuccess?.Invoke();
+            }
+            else
+            {
+                MessageBox.Show(registrationViewModel.ErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
     }
 }

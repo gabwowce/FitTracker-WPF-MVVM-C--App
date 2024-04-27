@@ -19,13 +19,23 @@ namespace FitTracker.Views
     public partial class AddDayPage : Page
     {
         private DayInfo dayInfo;
-        private string date;
-        private MenuBarViewModel menuBarViewModel;
+        public string Date { get; private set; }
+
         public AddDayPage(string date)
         {
-            this.DataContext = new MyDiaryPageViewModel(menuBarViewModel);
+
             InitializeComponent();
-            this.date = date;
+            this.Date = date;
+            this.DataContext = this;
+
+        }
+
+
+        public event Action onCancelAddDay;
+
+        private void CancelButt(object sender, RoutedEventArgs e)
+        {
+            onCancelAddDay?.Invoke();
         }
     }
 }

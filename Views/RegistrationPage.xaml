@@ -20,9 +20,9 @@
             <Button Grid.Column="1" Content="Register" Width="100" Background="#BFB2FF" Foreground="#5800AA" Margin="0,10"/>
         </Grid>
 
-        <xctk:WatermarkTextBox Watermark="Username" x:Name="UsernameBox" Width="200" Margin="0,10" Foreground="#5800AA"/>
+        <xctk:WatermarkTextBox Watermark="Username" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" x:Name="UsernameBox" Width="200" Margin="0,10" Foreground="#5800AA"/>
         <xctk:WatermarkPasswordBox Watermark="Password" x:Name="PasswordBox" Width="200" Margin="0,10"/>
         <xctk:WatermarkPasswordBox Watermark="Repeat password" x:Name="RepeatPasswordBox" Width="200" Margin="0,10"/>
-        <Button Content="Next" Click="CompleteRegistration" Width="200" Margin="0,10" Background="#BFB2FF" Foreground="#5800AA"/>
+        <Button Content="Next" Command="{Binding RegisterCommand}" Click="CompleteRegistration" Width="200" Margin="0,10" Background="#BFB2FF" Foreground="#5800AA"/>
     </StackPanel>
 </Page>

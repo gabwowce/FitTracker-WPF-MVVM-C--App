@@ -10,11 +10,13 @@ namespace FitTracker.ViewModels
     public class DayInfo
     {
         public string Day { get; set; }
+        public string MonthDay { get; set; }
         public Brush BackgroundColor { get; set; }
         public string WeekDay { get; set; }
 
         public Brush FontColor { get; set; }
-        public string TodayDate { get; set; }
+        public string TodayDate { get; set; } = DateTime.Now.ToString("yyyy-MM-dd");
+
 
     }
 
@@ -78,7 +80,8 @@ namespace FitTracker.ViewModels
                     Day = date.ToString("dd"),
                     BackgroundColor = (date == today) ? myCustomColor : Brushes.White,
                     FontColor = isBeforeOrAfterWeek ? greyBrush : Brushes.Black,
-                    WeekDay = (date == today) ? "Today" : weekdayAbbreviations[(int)date.DayOfWeek]
+                    WeekDay = (date == today) ? "Today" : weekdayAbbreviations[(int)date.DayOfWeek],
+                    MonthDay = date.ToString("MMMM dd")
                 };
                 WeekDays.Add(dayInfo);
             }

@@ -20,33 +20,37 @@ namespace FitTracker.Views
         private RegistrationPage registrationPage;
         private RegistrationFillForm registrationFillForm;
         private AddDayPage addDayPage;
-        private string TodayDate { get; set; }
+
+
 
         public PageFactory(Frame mainFrame, MenuBarViewModel menuBarViewModel)
         {
+            /*RegistrationViewModel registrationViewModel = new RegistrationViewModel();*/
+            /*LoginViewModel loginViewModel = new LoginViewModel();*/
             this.mainFrame = mainFrame;
             this.menuBarViewModel = menuBarViewModel;
-        }
-
-        public RegistrationPage CreateRegistrationPage()
-        {
-            return registrationPage ?? (registrationPage = new RegistrationPage());
+          /*  this.loginPage = CreateLoginPage(loginViewModel);*/
 
         }
 
-        public RegistrationFillForm CreateRegistrationFillForm()
+        public RegistrationPage CreateRegistrationPage(RegistrationViewModel registrationViewModel)
         {
-            return registrationFillForm ?? (registrationFillForm = new RegistrationFillForm());
+            return registrationPage ?? (registrationPage = new RegistrationPage(registrationViewModel));
+
         }
 
-        public LoginPage CreateLoginPage()
+        public RegistrationFillForm CreateRegistrationFillForm(RegistrationViewModel registrationViewModel)
         {
-            return loginPage ?? (loginPage = new LoginPage());
+            return registrationFillForm ?? (registrationFillForm = new RegistrationFillForm(registrationViewModel));
+        }
+
+        public LoginPage CreateLoginPage(LoginViewModel loginViewModel)
+        {
+            return loginPage ?? (loginPage = new LoginPage(loginViewModel));
         }
 
         public AddDayPage CreateAddDayPage(string date)
         {
-            // Sukuria AddDayPage su perduota data
             return new AddDayPage(date);
         }
 

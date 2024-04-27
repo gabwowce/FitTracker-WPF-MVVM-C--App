@@ -20,7 +20,7 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Margin="5,0" Text="{Binding date}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Margin="5,0" Text="{Binding Date}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -31,10 +31,10 @@
             </Grid.ColumnDefinitions>
 
 
-            <xctk:WatermarkTextBox Grid.Column="0" Watermark="Enter Weight" x:Name="WghtrBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
-            <xctk:WatermarkTextBox Grid.Column="1" Watermark="Enetr Kcal" x:Name="kcalBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
-            <xctk:WatermarkTextBox Grid.Column="2" Watermark="Enetr Water" x:Name="waterlBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
-            <xctk:WatermarkTextBox Grid.Column="3" Watermark="Enetr Sleep hours" x:Name="sleeplBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="0" Watermark="Enter Weight" Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged}" x:Name="WghtrBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="1" Watermark="Enetr Kcal" Text="{Binding Calories, UpdateSourceTrigger=PropertyChanged}" x:Name="kcalBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="2" Watermark="Enetr Water" Text="{Binding WaterIntake, UpdateSourceTrigger=PropertyChanged}" x:Name="waterlBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
+            <xctk:WatermarkTextBox Grid.Column="3" Watermark="Enetr Sleep hours" Text="{Binding SleepHours, UpdateSourceTrigger=PropertyChanged}" x:Name="sleeplBox" Foreground="#5800AA" HorizontalAlignment="Center" VerticalAlignment="Center" Width="170" Margin="0,0,0,10"/>
 
         </Grid>
 
@@ -52,16 +52,16 @@
 
                 <TextBlock Grid.Row="0" Text="Physical Activity" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                    <userControls:MyCustomToggleButton x:Name="yogaButt" ButtonContent="Yoga" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="runButt" ButtonContent="Running" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="gymButt" ButtonContent="Gym" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="SwimButt" ButtonContent="Swimming" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="walkButt" ButtonContent="Waliking" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="teamButt" ButtonContent="Team Sports" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="yogaButt" ButtonContent="Yoga" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="runButt" ButtonContent="Running" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="gymButt" ButtonContent="Gym" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="SwimButt" ButtonContent="Swimming" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="walkButt" ButtonContent="Waliking" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="teamButt" ButtonContent="Team Sports" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
 
-                    <userControls:MyCustomToggleButton x:Name="cycmButt" ButtonContent="Cycling" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="danceButt" ButtonContent="Dancing" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="balanceButt" ButtonContent="Balance" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="cycmButt" ButtonContent="Cycling" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="danceButt" ButtonContent="Dancing" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="balanceButt" ButtonContent="Balance" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
                 </WrapPanel>
             </Grid>
 
@@ -115,8 +115,21 @@
 
         </Grid>
 
-        <xctk:WatermarkTextBox Grid.Row="4" Watermark="Write a note.." x:Name="noteBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="545" Height="40" Margin="10,0"/>
-        <Button Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Done" Width="200" Margin="20,0" Background="#BFB2FF" Foreground="#5800AA" Height="40"/>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="30"/>
+
+            </Grid.ColumnDefinitions>
+
+            <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="4" Watermark="Write a note.." x:Name="noteBox" Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="40" Margin="10,20" />
+            <Button Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Cancel" Click="CancelButt"  Width="60"  Background="White" BorderBrush="#BFB2FF" BorderThickness="2" FontWeight="DemiBold" Foreground="#BFB2FF" Height="40"  Margin="0,20"/>
+            <Button Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Save" Command="{Binding SaveCommand}" Width="60" Background="#BFB2FF" Foreground="White" Height="40" BorderThickness="2" Margin="0,20" FontWeight="DemiBold" BorderBrush="#BFB2FF"/>
+        </Grid>
+
+
 
     </Grid>
 </Page>

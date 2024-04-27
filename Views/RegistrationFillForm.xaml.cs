@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTracker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,20 +16,36 @@ using System.Windows.Shapes;
 
 namespace FitTracker.Views
 {
-    /// <summary>
-    /// Interaction logic for RegistrationFillForm.xaml
-    /// </summary>
+
     public partial class RegistrationFillForm : Page
     {
-        public RegistrationFillForm()
+        private RegistrationViewModel registrationViewModel;
+        public RegistrationFillForm(RegistrationViewModel viewModel)
         {
             InitializeComponent();
+            registrationViewModel = viewModel;
+            this.DataContext = registrationViewModel;
         }
 
         public event Action OnSubmit;
         private void Submit(object sender, RoutedEventArgs e)
         {
-            OnSubmit?.Invoke();
+
+            if (registrationViewModel.IsValidComplete())
+            {
+                registrationViewModel.CompleteRegister();  // Baigti registraciją ir išsaugoti duomenis DB
+                OnSubmit?.Invoke();  // Galbūt naviguoti atgal į prisijungimo puslapį ar pagrindinį puslapį
+            }
+            else
+            {
+                MessageBox.Show(registrationViewModel.ErrorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

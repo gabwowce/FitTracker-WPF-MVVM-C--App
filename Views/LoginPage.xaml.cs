@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FitTracker.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,13 @@ namespace FitTracker.Views
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage()
+        private LoginViewModel loginViewModel;
+        public LoginPage(LoginViewModel viewModel)
         {
             InitializeComponent();
+
+            loginViewModel = viewModel;
+            this.DataContext = loginViewModel;
         }
 
         public event Action OnLoginSuccess;
@@ -31,8 +37,20 @@ namespace FitTracker.Views
 
         private void SignInButt(object sender, RoutedEventArgs e)
         {
-            // Tikrinkite prisijungimo kredencialus ir, jei sėkminga, iškvieskite įvykį
-            OnLoginSuccess?.Invoke();
+
+            var password = PasswordBox.Password;
+
+            loginViewModel.Password = password;
+            
+
+            if (loginViewModel.IsValidSignIn())
+            {
+                OnLoginSuccess?.Invoke();
+            }
+            else
+            {
+                MessageBox.Show(loginViewModel.ErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void RegisterNavButt(object sender, RoutedEventArgs e)

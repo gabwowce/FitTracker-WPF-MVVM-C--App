@@ -24,12 +24,16 @@ namespace FitTracker.Views
         public MenuBar menuBar { get; private set; }
 
         private PageFactory pageFactory;
+        private RegistrationViewModel registrationViewModel;
+        private LoginViewModel loginViewModel;
 
         private MenuBarViewModel menuBarViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
+            registrationViewModel = new RegistrationViewModel();
+            loginViewModel = new LoginViewModel();
             MainViewModel = new MainViewModel();
             DataContext = MainViewModel;
             menuBarViewModel = new MenuBarViewModel();
@@ -37,9 +41,9 @@ namespace FitTracker.Views
             pageFactory = new PageFactory(MainFrame, menuBarViewModel);
 
             // Sukurti puslapius per PageFactory
-            var loginPage = pageFactory.CreateLoginPage();
-            var registrationPage = pageFactory.CreateRegistrationPage(); // Asumuojame, kad ši funkcija yra sukurta
-            var registrationFillForm = pageFactory.CreateRegistrationFillForm(); // Asumuojame, kad ši funkcija yra sukurta
+            var loginPage = pageFactory.CreateLoginPage(loginViewModel);
+            var registrationPage = pageFactory.CreateRegistrationPage(registrationViewModel); // Asumuojame, kad ši funkcija yra sukurta
+            var registrationFillForm = pageFactory.CreateRegistrationFillForm(registrationViewModel); // Asumuojame, kad ši funkcija yra sukurta
             var myDiaryPage = pageFactory.CreateMyDiaryPage();
 
             // Prisegti įvykių tvarkytojus
@@ -62,7 +66,7 @@ namespace FitTracker.Views
             // RegistrationFillForm įvykių tvarkytojas
             registrationFillForm.OnSubmit += () => MainFrame.Navigate(pageFactory.CreateMyDiaryPage());
 
-            myDiaryPage.onAddDayClick += () => MainFrame.Navigate(pageFactory.CreateAddDayPage());
+            
 
         }
     }

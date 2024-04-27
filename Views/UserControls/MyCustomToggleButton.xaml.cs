@@ -22,6 +22,15 @@ namespace FitTracker.Views.UserControls
     {
         public static readonly DependencyProperty ButtonContentProperty = DependencyProperty.Register(
         "ButtonContent", typeof(string), typeof(MyCustomToggleButton), new PropertyMetadata(default(string), OnButtonContentChanged));
+
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+        "Command", typeof(ICommand), typeof(MyCustomToggleButton), new PropertyMetadata(null));
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
         public MyCustomToggleButton()
         {
             InitializeComponent();
