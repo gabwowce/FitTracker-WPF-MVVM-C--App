@@ -1,4 +1,4 @@
-﻿using FitTracker.ViewModels;
+﻿ using FitTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

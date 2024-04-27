@@ -92,6 +92,7 @@ namespace FitTracker.Views
         private void NavigateBackToMain(AddDayPage addDayPage)
         {
             addDayPage.onCancelAddDay += () => mainFrame.Navigate(this);
+            addDayPage.onSaveAddDay += () => mainFrame.Navigate(this);
         }
 
         public event Action onAddDayClick;

@@ -1,6 +1,7 @@
 ﻿using FitTracker.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +27,30 @@ namespace FitTracker.Views
 
             InitializeComponent();
             this.Date = date;
-            this.DataContext = this;
+
+            this.DataContext = new AddDayViewModel(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
 
         }
 
 
         public event Action onCancelAddDay;
+        public event Action onSaveAddDay;
 
         private void CancelButt(object sender, RoutedEventArgs e)
         {
             onCancelAddDay?.Invoke();
         }
+
+        private void SaveButt(object sender, RoutedEventArgs e)
+        {
+            var viewModel = this.DataContext as AddDayViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SaveRecord();
+            }
+
+            onSaveAddDay?.Invoke();
+        }
     }
+    
 }
