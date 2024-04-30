@@ -1,4 +1,5 @@
 ﻿<Page x:Class="FitTracker.Views.RegistrationFillForm"
+      KeyDown="Page_KeyDown"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,11 +15,13 @@
         <Image Source="Images/logo.png" Width="200" Height="100" Margin="0,10"/>
 
 
-        <ComboBox x:Name="GenderBox" Width="200" Margin="0,10" Foreground="#5800AA" IsEditable="True" IsReadOnly="True" SelectedIndex="0">
+        <ComboBox x:Name="GenderBox" Width="200" Margin="0,10" Foreground="#5800AA" IsEditable="False" SelectedIndex="1" SelectedItem="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Content="Select Gender" IsEnabled="False"/>
             <ComboBoxItem Content="Female"/>
             <ComboBoxItem Content="Male"/>
         </ComboBox>
+
+
         <xctk:WatermarkTextBox x:Name="WeightBox" Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged}" Watermark="Weight (kg)" Width="200" Margin="0,10" Foreground="#5800AA"/>
         <xctk:WatermarkTextBox x:Name="HeightBox" Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Watermark="Height (cm)" Width="200" Margin="0,10" Foreground="#5800AA"/>
         <DatePicker x:Name="DatePicker" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayDateStart="01/01/1900" Width="200" Margin="0,10" Foreground="#5800AA"/>

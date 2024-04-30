@@ -6,12 +6,16 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.ComponentModel;
+
 
 namespace FitTracker.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel 
 
     {
+
         private LoginPage loginPage;
         private UserRepository _userRepository;
         public string Username { get; set; }
@@ -24,6 +28,7 @@ namespace FitTracker.ViewModels
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString;
             _userRepository = new UserRepository(connectionString);
         }
+
 
         public bool IsValidSignIn()
         {

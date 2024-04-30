@@ -100,7 +100,7 @@ namespace FitTracker.ViewModels
         public bool IsValidComplete()
         {
             ErrorMessage = "";
-            if (string.IsNullOrEmpty(Gender)) ErrorMessage += "Gender is required.\n";
+            if (string.IsNullOrEmpty(Gender) || Gender == "Select Gender") ErrorMessage += "Gender is required.\n";
             if (Height <= 0) ErrorMessage += "Height must be greater than zero.\n";
             if (Weight <= 0) ErrorMessage += "Weight must be greater than zero.\n";
             if (DateOfBirth >= DateTime.Now) ErrorMessage += "Date of Birth must be in the past.\n";

@@ -9,14 +9,8 @@ namespace FitTracker.ViewModels
 {
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
-        private readonly Func<T, bool> _canExecute;
-
-        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
+        private readonly Action<object> execute;
+        private readonly Func<object, bool> canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -24,14 +18,22 @@ namespace FitTracker.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this.canExecute = canExecute;
+        }
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            bool result = canExecute == null || canExecute(parameter);
+            Console.WriteLine($"CanExecute result: {result}");
+            return result;
         }
 
         public void Execute(object parameter)
         {
-            _execute((T)parameter);
+            execute(parameter);
         }
     }
 

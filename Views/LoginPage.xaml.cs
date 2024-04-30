@@ -30,6 +30,7 @@ namespace FitTracker.Views
 
             loginViewModel = viewModel;
             this.DataContext = loginViewModel;
+            this.KeyDown += Page_KeyDown;
         }
 
         public event Action OnLoginSuccess;
@@ -56,6 +57,17 @@ namespace FitTracker.Views
         private void RegisterNavButt(object sender, RoutedEventArgs e)
         {
             OnNavigateToRegistration?.Invoke();
+        }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var args = new RoutedEventArgs();
+
+                // Tiesiogiai iškviečiame SignInButt metodą
+                SignInButt(sender, args);
+            }
         }
 
     }

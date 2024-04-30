@@ -24,7 +24,7 @@ namespace FitTracker.Views
             InitializeComponent();
             registrationViewModel = viewModel;  
             this.DataContext = registrationViewModel;
-
+            this.KeyDown += Page_KeyDown;
         }
 
 
@@ -59,5 +59,15 @@ namespace FitTracker.Views
             MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var args = new RoutedEventArgs();
+
+                // Tiesiogiai iškviečiame SignInButt metodą
+                CompleteRegistration(sender, args);
+            }
+        }
     }
 }
