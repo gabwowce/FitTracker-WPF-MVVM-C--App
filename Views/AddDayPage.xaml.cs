@@ -28,7 +28,7 @@ namespace FitTracker.Views
             InitializeComponent();
             this.Date = date;
 
-            this.DataContext = new AddDayViewModel(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
+            this.DataContext = new AddDayViewModel(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString, Date);
 
         }
 

@@ -43,7 +43,7 @@ namespace FitTracker.Models
                 }
 
                 // Insert activities
-                InsertActivities(conn, logId, record.Activities.ToList()); ;
+                InsertActivities(conn, logId, record.Activities.ToList()); 
                 // Insert moods
                 InsertMoods(conn, logId, record.Moods.ToList());
                 // Insert other factors

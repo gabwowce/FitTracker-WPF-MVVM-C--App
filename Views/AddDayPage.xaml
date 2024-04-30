@@ -52,12 +52,12 @@
 
                 <TextBlock Grid.Row="0" Text="Physical Activity" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                    <userControls:MyCustomToggleButton x:Name="yogaButt" ButtonContent="Yoga" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="runButt" ButtonContent="Running" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="gymButt" ButtonContent="Gym" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="SwimButt" ButtonContent="Swimming" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="walkButt" ButtonContent="Waliking" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="teamButt" ButtonContent="Team Sports" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="yogaButt" ButtonContent="Yoga" Command ="{Binding ToggleActivityCommand}" CommandParameter="Yoga" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="runButt" ButtonContent="Running" Command ="{Binding ToggleActivityCommand}" CommandParameter="Running" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="gymButt" ButtonContent="Gym" Command ="{Binding ToggleActivityCommand}" CommandParameter="Gym" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="SwimButt" ButtonContent="Swimming" Command ="{Binding ToggleActivityCommand}" CommandParameter="Swimming" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="walkButt" ButtonContent="Waliking" Command ="{Binding ToggleActivityCommand}" CommandParameter="Waliking" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="teamButt" ButtonContent="Team Sports" Command ="{Binding ToggleActivityCommand}" CommandParameter="Team Sports" Margin="5"/>
 
                     <userControls:MyCustomToggleButton x:Name="cycmButt" ButtonContent="Cycling" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
                     <userControls:MyCustomToggleButton x:Name="danceButt" ButtonContent="Dancing" Command ="{Binding ToggleActivityCommand}" Margin="5"/>
@@ -75,15 +75,15 @@
 
                 <TextBlock Grid.Row="0" Text="Mood" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                    <userControls:MyCustomToggleButton x:Name="calmButt" ButtonContent="Calm" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="happyButt" ButtonContent="Happy" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="energButt" ButtonContent="Energetic" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="friskButt" ButtonContent="Frisky" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="sadButt" ButtonContent="Sad" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="depressButt" ButtonContent="Depressed" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="confuButt" ButtonContent="Confused" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="irritatedButt" ButtonContent="Irritated" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
-                    <userControls:MyCustomToggleButton x:Name="lowenerdButt" ButtonContent="Low Energy" Command ="{Binding ToggleMoodCommand}" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="calmButt" ButtonContent="Calm" Command ="{Binding ToggleMoodCommand}" CommandParameter="Calm" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="happyButt" ButtonContent="Happy" Command ="{Binding ToggleMoodCommand}" CommandParameter="Happy" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="energButt" ButtonContent="Energetic" Command ="{Binding ToggleMoodCommand}" CommandParameter="Energetic" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="friskButt" ButtonContent="Frisky" Command ="{Binding ToggleMoodCommand}" CommandParameter="Frisky" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="sadButt" ButtonContent="Sad" Command ="{Binding ToggleMoodCommand}" CommandParameter="Sad" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="depressButt" ButtonContent="Depressed" Command ="{Binding ToggleMoodCommand}" CommandParameter="Depressed" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="confuButt" ButtonContent="Confused" Command ="{Binding ToggleMoodCommand}" CommandParameter="Confused" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="irritatedButt" ButtonContent="Irritated" Command ="{Binding ToggleMoodCommand}" CommandParameter="Irritated" Margin="5"/>
+                    <userControls:MyCustomToggleButton x:Name="lowenerdButt" ButtonContent="Low Energy" Command ="{Binding ToggleMoodCommand}" CommandParameter="Low Energy" Margin="5"/>
                 </WrapPanel>
             </Grid>
             
@@ -97,21 +97,21 @@
 
             <TextBlock Grid.Row="0" Text="Other" FontWeight="DemiBold" Margin="15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                <userControls:MyCustomToggleButton x:Name="travelButt" ButtonContent="Travel" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="StressButt" ButtonContent="Stress" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="MedButt" ButtonContent="Meditation" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="injurykButt" ButtonContent="Desease or Injury" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="alcoButt" ButtonContent="Alcochol" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="socialActivityButt" ButtonContent="Social Activity" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="cookingButt" ButtonContent="Cooking" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="workloadButt" ButtonContent="Workload" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="healthyEatingButt" ButtonContent="Healthy Eating" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="sunExposureButt" ButtonContent="Sun Exposure" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="readingButt" ButtonContent="Reading" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="relaxationButt" ButtonContent="Relaxation" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="creativeActivitiesButt" ButtonContent="Creative Activities" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="petCareButt" ButtonContent="Pet Care" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
-                <userControls:MyCustomToggleButton x:Name="learningNewSkillsButt" ButtonContent="Learning New Skills" Command ="{Binding ToggleOtherFactorCommand}" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="travelButt" ButtonContent="Travel" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Travel" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="StressButt" ButtonContent="Stress" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Stress" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="MedButt" ButtonContent="Meditation" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Meditation" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="injurykButt" ButtonContent="Desease or Injury" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Desease or Injury" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="alcoButt" ButtonContent="Alcochol" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Alcochol" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="socialActivityButt" ButtonContent="Social Activity" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Social Activity" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="cookingButt" ButtonContent="Cooking" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Cooking" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="workloadButt" ButtonContent="Workload" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Workload" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="healthyEatingButt" ButtonContent="Healthy Eating" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Healthy Eating" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="sunExposureButt" ButtonContent="Sun Exposure" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Sun Exposure" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="readingButt" ButtonContent="Reading" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Reading" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="relaxationButt" ButtonContent="Relaxation" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Relaxation" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="creativeActivitiesButt" ButtonContent="Creative Activities" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Creative Activities" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="petCareButt" ButtonContent="Pet Care" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Pet Care" Margin="5"/>
+                <userControls:MyCustomToggleButton x:Name="learningNewSkillsButt" ButtonContent="Learning New Skills" Command ="{Binding ToggleOtherFactorCommand}" CommandParameter="Learning New Skills" Margin="5"/>
 
             </WrapPanel>
 
@@ -126,7 +126,7 @@
 
             </Grid.ColumnDefinitions>
 
-            <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="4" Watermark="Write a note.." x:Name="noteBox" Text="{Binding Note, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="40" Margin="10,20" />
+            <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="4" Watermark="Write a note.." x:Name="noteBox" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="40" Margin="10,20" />
             <Button Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Cancel" Click="CancelButt"  Width="60"  Background="White" BorderBrush="#BFB2FF" BorderThickness="2" FontWeight="DemiBold" Foreground="#BFB2FF" Height="40"  Margin="0,20"/>
             <Button Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Save" Click="SaveButt" Command="{Binding SaveCommand}" Width="60" Background="#BFB2FF" Foreground="White" Height="40" BorderThickness="2" Margin="0,20" FontWeight="DemiBold" BorderBrush="#BFB2FF"/>
         </Grid>
