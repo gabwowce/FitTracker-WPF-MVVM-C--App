@@ -6,6 +6,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FitTracker.Views"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegistrationFillForm">
@@ -14,12 +16,14 @@
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <Image Source="Images/logo.png" Width="200" Height="100" Margin="0,10"/>
 
-
-        <ComboBox x:Name="GenderBox" Width="200" Margin="0,10" Foreground="#5800AA" IsEditable="False" SelectedIndex="1" SelectedItem="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBoxItem Content="Select Gender" IsEnabled="False"/>
+        <xctk:WatermarkComboBox x:Name="GenderBox" Width="200" Margin="0,10" Foreground="#5800AA"
+                        SelectedValue="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedValuePath="Content" IsEditable="False" SelectedIndex="0"
+                        Watermark="Select Gender">
             <ComboBoxItem Content="Female"/>
             <ComboBoxItem Content="Male"/>
-        </ComboBox>
+        </xctk:WatermarkComboBox>
+
 
 
         <xctk:WatermarkTextBox x:Name="WeightBox" Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged}" Watermark="Weight (kg)" Width="200" Margin="0,10" Foreground="#5800AA"/>
