@@ -22,8 +22,8 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="65"/>
                 <RowDefinition Height="75"/>
-                <RowDefinition Height="75"/>
                 <RowDefinition Height="*"/>
+                
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" VerticalAlignment="Stretch">
@@ -124,7 +124,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Pakeičiame TextBlock elementus į Border su TextBlock viduje -->
+                        
                         <Border Grid.Column="0" BorderBrush="#D7D7D7" BorderThickness="1">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -147,8 +147,22 @@
                 <Button Grid.Row="1" Height="20" Width="150" Background="#BFB2FF" Content="+ ADD DAY" Click="OpenAddDayPageWithCurrentDate"/>
             </Grid>
 
-            <userControls:DailyStatsControl x:Name="stats" Grid.Row="3"/>
-            
+
+
+            <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding DayRecords}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <userControls:DailyStatsControl DayRecord="{Binding}" ParentViewModel="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
 
 

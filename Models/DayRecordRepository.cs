@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 
 namespace FitTracker.Models
-{
+{ 
     internal class DayRecordRepository
     {
         private string connectionString;
@@ -18,7 +18,7 @@ namespace FitTracker.Models
             this.connectionString = connectionString;
         }
 
-        public void AddDayRecord(DayRecord record)
+        public void AddDayRecord(DayRecord record, int UserID)
         {
             int logId = 0;
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -30,7 +30,7 @@ namespace FitTracker.Models
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", 1);  
+                    cmd.Parameters.AddWithValue("@UserID", UserID);  
                     cmd.Parameters.AddWithValue("@Date", record.Date);
                     cmd.Parameters.AddWithValue("@Weight_kg", record.Weight);
                     cmd.Parameters.AddWithValue("@Calories", record.Calories);
@@ -39,15 +39,15 @@ namespace FitTracker.Models
                     cmd.Parameters.AddWithValue("@Notes", record.Notes);
 
                     cmd.ExecuteNonQuery();
-                    logId = (int)cmd.LastInsertedId;
+                    record.LogID = (int)cmd.LastInsertedId;
                 }
 
                 // Insert activities
-                InsertActivities(conn, logId, record.Activities.ToList()); 
+                InsertActivities(conn, record.LogID, record.Activities.ToList()); 
                 // Insert moods
-                InsertMoods(conn, logId, record.Moods.ToList());
+                InsertMoods(conn, record.LogID, record.Moods.ToList());
                 // Insert other factors
-                InsertOtherFactors(conn, logId, record.OtherFactors.ToList());
+                InsertOtherFactors(conn, record.LogID, record.OtherFactors.ToList());
             }
         }
 
@@ -92,6 +92,93 @@ namespace FitTracker.Models
                 }
             }
         }
+
+        public async Task<List<DayRecord>> GetDayRecordsForUserAsync(int userId)
+        {
+            List<DayRecord> records = new List<DayRecord>();
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                var command = new MySqlCommand("SELECT * FROM DailyLogs WHERE UserID = @UserId ORDER BY Date DESC", connection);
+                command.Parameters.AddWithValue("@UserId", userId);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var record = new DayRecord
+                        {
+                            LogID = reader.IsDBNull(reader.GetOrdinal("LogID")) ? 0 : reader.GetInt32(reader.GetOrdinal("LogID")),
+                            Date = reader.IsDBNull(reader.GetOrdinal("Date")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("Date")),
+                            Weight = reader.IsDBNull(reader.GetOrdinal("Weight_kg")) ? (float?)null : reader.GetFloat(reader.GetOrdinal("Weight_kg")),
+                            Calories = reader.IsDBNull(reader.GetOrdinal("Calories")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("Calories")),
+                            WaterIntake = reader.IsDBNull(reader.GetOrdinal("WaterIntake_liters")) ? (float?)null : reader.GetFloat(reader.GetOrdinal("WaterIntake_liters")),
+                            SleepHours = reader.IsDBNull(reader.GetOrdinal("SleepHours")) ? (float?)null : reader.GetFloat(reader.GetOrdinal("SleepHours")),
+                            Notes = reader.IsDBNull(reader.GetOrdinal("Notes")) ? string.Empty : reader.GetString(reader.GetOrdinal("Notes")),
+                        };
+                        records.Add(record);
+                    }
+                }
+            }
+            
+            return records;
+        }
+
+
+
+
+        public void DeleteDayRecord(int logId)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                // Delete associated activities, moods, and other factors first
+                DeleteActivities(conn, logId);
+                DeleteMoods(conn, logId);
+                DeleteOtherFactors(conn, logId);
+
+                // Then delete the day record itself
+                string sql = @"DELETE FROM DailyLogs WHERE LogID = @LogID";
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@LogID", logId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void DeleteActivities(MySqlConnection conn, int logId)
+        {
+            string sql = "DELETE FROM UserActivities WHERE LogID = @LogID";
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@LogID", logId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void DeleteMoods(MySqlConnection conn, int logId)
+        {
+            string sql = "DELETE FROM UserMoods WHERE LogID = @LogID";
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@LogID", logId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void DeleteOtherFactors(MySqlConnection conn, int logId)
+        {
+            string sql = "DELETE FROM UserEvents WHERE LogID = @LogID";
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@LogID", logId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
 
     }
 }

@@ -39,11 +39,11 @@ namespace FitTracker.Views
 
             menuBarViewModel.SetActivePage(ActivePage.Diary);
 
-            this.DataContext = new MyDiaryPageViewModel(menuBarViewModel);
-
+            var viewModel = new MyDiaryPageViewModel(menuBarViewModel);
+            this.DataContext = viewModel;
 
             AttachEventHandlers();
-
+            this.Loaded += async (sender, e) => await viewModel.InitializeAsync();
 
 
         }

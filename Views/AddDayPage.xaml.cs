@@ -1,4 +1,5 @@
-﻿using FitTracker.ViewModels;
+﻿using FitTracker.Models;
+using FitTracker.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,14 +23,17 @@ namespace FitTracker.Views
         private DayInfo dayInfo;
         public string Date { get; private set; }
 
+        private AddDayViewModel viewModel;
+
         public AddDayPage(string date)
         {
 
             InitializeComponent();
             this.Date = date;
 
-            this.DataContext = new AddDayViewModel(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString, Date);
-
+            int userId = UserSession.UserId;
+            viewModel = new AddDayViewModel(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString, Date, userId);
+            this.DataContext = viewModel;
         }
 
 
@@ -50,6 +54,16 @@ namespace FitTracker.Views
             }
 
             onSaveAddDay?.Invoke();
+        }
+
+        private void SelectDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateSelectionWindow dateSelectionWindow = new DateSelectionWindow();
+            if (dateSelectionWindow.ShowDialog() == true)
+            {
+                DateTime selectedDate = dateSelectionWindow.SelectedDate;
+                viewModel.Date = selectedDate.ToString("MMMM dd");
+            }
         }
     }
     

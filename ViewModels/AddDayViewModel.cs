@@ -16,13 +16,37 @@ namespace FitTracker.ViewModels
 {
     internal class AddDayViewModel : INotifyPropertyChanged
     {
-        public string Date { get; set; } /*= DateTime.Now.ToString("yyyy-MM-dd");*/
+        public string _date; 
         private float? _weight;
         private int? _calories;
         private float? _waterIntake;
         private float? _sleepHours;
         private string _notes;
+        private int UserID;
 
+        public string Date
+        {
+            get => _date;
+            set
+            {
+                if (_date != value)
+                {
+                    if (_date != value)
+                    {
+                        _date = value;
+                        OnPropertyChanged(nameof(Date));
+
+                        if (DateTime.TryParse(_date, out var parsedDate))
+                        {
+                            if (CurrentRecord != null)
+                            {
+                                CurrentRecord.Date = parsedDate;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public float? Weight
         {
             get => _weight;
@@ -102,8 +126,9 @@ namespace FitTracker.ViewModels
         private DayRecordRepository repository;
         public DayRecord CurrentRecord { get; private set; }
 
-        public AddDayViewModel(string connectionString, string dateString)
+        public AddDayViewModel(string connectionString, string dateString, int userID)
         {
+            this.UserID = userID;
             repository = new DayRecordRepository(connectionString);
 
             DateTime parsedDate;
@@ -149,10 +174,9 @@ namespace FitTracker.ViewModels
 
 
 
-        // Metodai, skirti pridėti ar pašalinti veiklas, nuotaikas ir kita.
-
         public void SaveRecord()
         {
+            
             CurrentRecord.Weight = this.Weight;
             CurrentRecord.Calories = this.Calories;
             CurrentRecord.WaterIntake = this.WaterIntake;
@@ -164,7 +188,9 @@ namespace FitTracker.ViewModels
             CurrentRecord.Moods = new List<string>(Moods);
             CurrentRecord.OtherFactors = new List<string>(OtherFactors);
 
-            repository.AddDayRecord(CurrentRecord);
+            
+            repository.AddDayRecord(CurrentRecord, UserID);
+
             OnPropertyChanged("CurrentRecord");
         } 
 

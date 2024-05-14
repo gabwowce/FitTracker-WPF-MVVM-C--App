@@ -15,14 +15,15 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="2024-04-23" FontSize="12" FontWeight="DemiBold"/>
+            <TextBlock Grid.Column="0" Text="{Binding Date, StringFormat='yyyy-MM-dd'}" FontSize="12" FontWeight="DemiBold"/>
 
 
-            <Button Grid.Column="1" Content="Edit" HorizontalAlignment="Right" Background="Transparent" VerticalAlignment="Center" Cursor="Hand" BorderThickness="0">
+            <Button Grid.Column="1" Content="Edit" HorizontalAlignment="Right" Background="Transparent" VerticalAlignment="Center" Cursor="Hand" BorderThickness="0" Margin="5,0">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Foreground" Value="Black"/>
@@ -50,6 +51,34 @@
                 </Button.Template>
             </Button>
 
+            <Button Grid.Column="2" Content="Delete" HorizontalAlignment="Right" Background="Transparent" VerticalAlignment="Center" Cursor="Hand" BorderThickness="0" Click="DeleteButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#4E8C00"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25">
+                            <Grid>
+                                <TextBlock Text="Delete" FontSize="10" FontWeight="Regular"/>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
 
         </Grid>
 
@@ -69,7 +98,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Pakeičiame TextBlock elementus į Border su TextBlock viduje -->
                 <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
                     <TextBlock Text="My Weight" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                 </Border>
@@ -92,20 +120,24 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Pakeičiame TextBlock elementus į Border su TextBlock viduje -->
                 <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="60kg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Weight, TargetNullValue=''}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
                 <Border Grid.Column="1" Background="#F2F2F2" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="1500kcal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Calories, TargetNullValue=''}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
                 <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="2l" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding WaterIntake, TargetNullValue=''}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
                 <Border Grid.Column="3" Background="#F2F2F2" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="7h" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding SleepHours, TargetNullValue=''}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </Grid>
         </Grid>
     </Grid>
+    
+    
+    
+    
+    
 </UserControl>

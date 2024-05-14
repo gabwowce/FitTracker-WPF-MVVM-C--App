@@ -1,7 +1,11 @@
-﻿using System;
+﻿using FitTracker.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using static FitTracker.ViewModels.MenuBarViewModel;
 
@@ -20,9 +24,45 @@ namespace FitTracker.ViewModels
 
     }
 
+
     public class MyDiaryPageViewModel : INotifyPropertyChanged
 
     {
+        private ObservableCollection<DayRecord> _dayRecords;
+        public ObservableCollection<DayRecord> DayRecords
+        {
+            get => _dayRecords;
+            set
+            {
+                _dayRecords = value;
+                OnPropertyChanged(nameof(DayRecords));
+            }
+        }
+
+        public async Task InitializeAsync()
+        {
+            await LoadDayRecords();
+        }
+
+        private async Task LoadDayRecords()
+        {
+            var repository = new DayRecordRepository(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
+            var dayRecords = await repository.GetDayRecordsForUserAsync(UserSession.UserId);
+            DayRecords = new ObservableCollection<DayRecord>(dayRecords);
+            OnPropertyChanged(nameof(DayRecords));
+        }
+
+        public void DeleteDayRecord(DayRecord record)
+        {
+            if (record != null)
+            {
+                var repository = new DayRecordRepository(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
+                repository.DeleteDayRecord(record.LogID);
+                DayRecords.Remove(record);
+            }
+        }
+
+
         public string TodayDate { get; set; }
         private string _currentMonthYear;
         public string CurrentMonthYear
@@ -58,7 +98,9 @@ namespace FitTracker.ViewModels
             CurrentMonthYear = DateTime.Now.ToString("yyyy MMMM");
             TodayDate = DateTime.Now.ToString("yyyy-MM-dd");
             GenerateWeekDays();
+
         }
+
 
         private void GenerateWeekDays()
         {

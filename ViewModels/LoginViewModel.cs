@@ -32,14 +32,46 @@ namespace FitTracker.ViewModels
 
         public bool IsValidSignIn()
         {
-            ErrorMessage = "";
-            if (string.IsNullOrEmpty(Username)) ErrorMessage += "Username is required.\n";
-            if (string.IsNullOrEmpty(Password)) ErrorMessage += "Password field is required.\n";
-            if (!_userRepository.UserExists(Username)) ErrorMessage += "Username doesn't exists.\n";
-            if (_userRepository.CorrectPassword(Username, Password)) ErrorMessage += "Wrong password.\n";
-            
 
-            return string.IsNullOrEmpty(ErrorMessage);
+            // Patikriname, ar įvesti visi reikalingi laukai
+            if (string.IsNullOrEmpty(Username))
+            {
+                ErrorMessage += "Username is required.\n";
+                
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                ErrorMessage += "Password field is required.\n";
+               
+            }
+
+            // Jeigu yra klaidų pranešimų iki šiol, grąžiname false
+            if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                return false;
+            }
+
+            // Tikriname vartotojo egzistavimą
+            if (!_userRepository.UserExists(Username))
+            {
+                ErrorMessage += "Username doesn't exist.\n";
+                return false;
+            }
+
+            // Tikriname slaptažodžio teisingumą
+
+            int userId = _userRepository.CheckCredentials(Username, Password);
+            if (userId > 0)
+            {
+                UserSession.InitializeUserSession(userId, Username);
+                return true;
+            }
+            else
+            {
+                ErrorMessage += "Wrong password.\n";
+                return false;
+            }
+
         }
 
     }

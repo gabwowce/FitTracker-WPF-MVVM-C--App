@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,29 @@ namespace FitTracker.Models
             }
         }
 
+        /* public bool CorrectPassword(string username, string password)
+         {
+             using (MySqlConnection conn = new MySqlConnection(_connectionString))
+             {
+                 conn.Open();
+                 string sql = "SELECT PasswordHash FROM Users WHERE Username = @Username";
+                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                 {
+                     cmd.Parameters.AddWithValue("@Username", username);
+                     object result = cmd.ExecuteScalar();
+                     if (result != null)
+                     {
+                         string storedPasswordHash = Convert.ToString(result);
+
+                         string inputPasswordHash = HashHelper.HashPassword(password);
+                         return storedPasswordHash == inputPasswordHash;
+
+                     }
+                     return false;
+                 }
+             }
+         }*/
+
         public bool CorrectPassword(string username, string password)
         {
             using (MySqlConnection conn = new MySqlConnection(_connectionString))
@@ -70,11 +94,45 @@ namespace FitTracker.Models
                     {
                         string storedPasswordHash = Convert.ToString(result);
                         string inputPasswordHash = HashHelper.HashPassword(password);
+
+                        // Išvedame debug informaciją
+                        System.Diagnostics.Debug.WriteLine($"Stored Hash: {storedPasswordHash}");
+                        System.Diagnostics.Debug.WriteLine($"Input Hash: {inputPasswordHash}");
+
+                        // Grąžiname rezultatą
                         return storedPasswordHash == inputPasswordHash;
                     }
                     return false;
                 }
             }
+        }
+
+
+
+        public int CheckCredentials(string username, string password)
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                conn.Open();
+                // Tikriname, ar egzistuoja vartotojas su tokiu vartotojo vardu
+                var cmd = new MySqlCommand("SELECT UserID, PasswordHash FROM Users WHERE Username = @Username", conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        int userId = Convert.ToInt32(reader["UserID"]);
+
+                        // Patikriname slaptažodį
+                        if (CorrectPassword(username, password))
+                        {
+                            return userId;  // Grąžiname vartotojo ID, jei slaptažodis teisingas
+                        }
+                    }
+                }
+            }
+            return 0;  // Grąžiname 0, jei vartotojas nerastas arba slaptažodis neteisingas
         }
     }
 }
