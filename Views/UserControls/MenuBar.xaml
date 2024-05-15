@@ -13,7 +13,7 @@
 
             <Button Content="My Profile" Background="{Binding ProfileButtonBackground}" Width="200" Height="30" Margin="10,0,0,0" Click="MyProfileNavButt"/>
             <Button Content="My Diary" Background="{Binding DiaryButtonBackground}" Width="200" Height="30" Margin="10,0,0,0" Click="MyDiaryNavButt"/>
-            <Button Content="Dashboard" Background="{Binding DashboardButtonBackground}" Width="200" Height="30" Margin="10,0,0,0" Click="DashboardNavButt"/>
+            <Button Content="My ToDo List" Background="{Binding DashboardButtonBackground}" Width="200" Height="30" Margin="10,0,0,0" Click="DashboardNavButt"/>
         </StackPanel>
     </Border>
     

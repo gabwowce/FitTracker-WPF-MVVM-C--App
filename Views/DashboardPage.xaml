@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FitTracker.Views"
       xmlns:userControls="clr-namespace:FitTracker.Views.UserControls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DashboardPage">
+      Title="Dashboard">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,6 +17,38 @@
         </Grid.ColumnDefinitions>
 
         <userControls:MenuBar x:Name="barMenu" Grid.Column="0" />
-        <Button Grid.Column="1" Content="dashboard"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="My ToDo List" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" FontWeight="Bold" FontSize="16"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <xctk:WatermarkTextBox Grid.Column="0" Watermark="add task..." Text="{Binding Task}" Margin="80,0,10,0" VerticalAlignment="Center" x:Name="TaskTextBox"/>
+
+                <Button Grid.Column="1" Content="+ADD" Width="70" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#BFB2FF"  Cursor="Hand" Click="AddButton_Click"/>
+            </Grid>
+
+            <ScrollViewer Grid.Row="2" Margin="59,0,40,20">
+                <ItemsControl x:Name="TaskList" ItemsSource="{Binding TaskCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <userControls:ToDoTaskControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            
+        </Grid>
     </Grid>
 </Page>

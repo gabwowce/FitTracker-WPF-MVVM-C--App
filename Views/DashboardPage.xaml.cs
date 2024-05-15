@@ -1,27 +1,14 @@
-﻿using FitTracker.ViewModels;
+﻿using FitTracker.Models;
+using FitTracker.ViewModels;
 using FitTracker.Views.UserControls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static FitTracker.ViewModels.MenuBarViewModel;
 
 namespace FitTracker.Views
 {
-
     public partial class DashboardPage : Page
     {
+        public ObservableCollection<string> TaskCollection { get; set; }
 
         private Frame mainFrame;
         private PageFactory pageFactory;
@@ -33,27 +20,39 @@ namespace FitTracker.Views
             this.mainFrame = mainFrame;
             this.pageFactory = pageFactory;
             this.menuBarViewModel = menuBarViewModel;
-            this.DataContext = menuBarViewModel;
+            int userId = UserSession.UserId;
+
+            var viewModel = new DashboardViewModel(menuBarViewModel,userId);
+            this.DataContext = viewModel;
 
             AttachEventHandlers();
+            this.Loaded += async (sender, e) => await viewModel.InitializeAsync();
         }
-
-
 
         private void AttachEventHandlers()
         {
             barMenu.OnNavigateToDashboard += () => {
-                this.menuBarViewModel.SetActivePage(ActivePage.Dashboard);
+                this.menuBarViewModel.SetActivePage(MenuBarViewModel.ActivePage.Dashboard);
                 mainFrame.Navigate(this);
             };
             barMenu.OnNavigateToDiary += () => {
-                this.menuBarViewModel.SetActivePage(ActivePage.Diary);
+                this.menuBarViewModel.SetActivePage(MenuBarViewModel.ActivePage.Diary);
                 mainFrame.Navigate(pageFactory.CreateMyDiaryPage());
             };
             barMenu.OnNavigateToProfile += () => {
-                this.menuBarViewModel.SetActivePage(ActivePage.Profile);
+                this.menuBarViewModel.SetActivePage(MenuBarViewModel.ActivePage.Profile);
                 mainFrame.Navigate(pageFactory.CreateProfilePage());
             };
+        }
+
+        private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var viewModel = this.DataContext as DashboardViewModel;
+            if (viewModel != null)
+            {
+                System.Diagnostics.Debug.Write("---------->Saved<-------------");
+                viewModel.SaveRecord();
+            }
         }
     }
 }
