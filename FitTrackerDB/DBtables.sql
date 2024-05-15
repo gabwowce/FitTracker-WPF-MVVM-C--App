@@ -68,7 +68,14 @@ CREATE TABLE UserEvents (
     FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
 
-
+-- User tasks table
+CREATE TABLE ToDoTasks(
+	TaskID INT PRIMARY KEY AUTO_INCREMENT,
+	UserID INT,
+	Task TEXT,
+	isCompleted BOOL,
+	FOREIGN KEY (UserID) REFERENCES Users(UserID)
+)
 
 
 
