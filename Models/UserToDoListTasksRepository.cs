@@ -41,7 +41,7 @@ namespace FitTracker.Models
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 await conn.OpenAsync();
-                string sql = @"SELECT * FROM ToDoTasks WHERE UserID = @UserId ORDER BY TaskID DESC";
+                string sql = @"SELECT * FROM ToDoTasks WHERE UserID = @UserId";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
@@ -76,6 +76,23 @@ namespace FitTracker.Models
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@TaskID", taskID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateTask(UserToDoListTasks task)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = @"UPDATE ToDoTasks SET isCompleted = @isCompleted WHERE TaskID = @TaskID";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TaskID", task.TaskID);
+                    cmd.Parameters.AddWithValue("@isCompleted", task.isCompleted);
+
                     cmd.ExecuteNonQuery();
                 }
             }
