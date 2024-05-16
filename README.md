@@ -16,6 +16,8 @@ FitTracker is a fitness tracker designed to help users track their metrics like 
 
 #### Profile Page:
 
+![2](https://github.com/gabwowce/FitTracker-WPF-MVVM-C--App/assets/134537965/12b09bca-28fe-4f78-927c-10f5b363ff4b)
+
 #### My Diary Page:
 
 #### Add Day Page:
