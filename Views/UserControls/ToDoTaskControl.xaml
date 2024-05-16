@@ -46,10 +46,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
+            <CheckBox Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding isCompleted, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
 
-            <Border Grid.Column="1" Height="25" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center">
-                <TextBlock Text="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold" Margin="10,0,0,0"/>
+            <Border Grid.Column="1" Height="25" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" x:Name="TaskBorder">
+                <TextBlock Text="{Binding Task}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold" Margin="10,0,0,0"/>
             </Border>
         </Grid>
     </Grid>

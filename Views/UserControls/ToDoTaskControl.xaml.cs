@@ -27,13 +27,12 @@ namespace FitTracker.Views.UserControls
 
         public UserToDoListTasks UserToDoListTasks
         {
-            get { return (UserToDoListTasks)GetValue(ToDoListTaskProperty); }
-            set { SetValue(ToDoListTaskProperty, value); }
+            get { return (UserToDoListTasks)GetValue(UserToDoListTasksProperty); }
+            set { SetValue(UserToDoListTasksProperty, value); }
         }
 
-        public static readonly DependencyProperty ToDoListTaskProperty =
+        public static readonly DependencyProperty UserToDoListTasksProperty =
             DependencyProperty.Register("UserToDoListTasks", typeof(UserToDoListTasks), typeof(ToDoTaskControl), new PropertyMetadata(null));
-
 
         public DashboardViewModel ParentViewModel
         {
@@ -42,22 +41,43 @@ namespace FitTracker.Views.UserControls
         }
 
         public static readonly DependencyProperty ParentViewModelProperty =
-            DependencyProperty.Register("ParentViewModel", typeof(DashboardViewModel), typeof(DailyStatsControl), new PropertyMetadata(null));
-
+            DependencyProperty.Register("ParentViewModel", typeof(DashboardViewModel), typeof(ToDoTaskControl), new PropertyMetadata(null));
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var UserToDoListTasks = this.UserToDoListTasks;
+            var userToDoListTasks = this.UserToDoListTasks;
             var parentDataContext = this.ParentViewModel;
 
-            if (UserToDoListTasks != null && parentDataContext != null)
+            if (userToDoListTasks != null && parentDataContext != null)
             {
                 if (MessageBox.Show("Are you sure you want to delete this task?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    parentDataContext.DeleteToDoListTask(UserToDoListTasks);
+                    parentDataContext.DeleteToDoListTask(userToDoListTasks);
                 }
+            }
+        }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateTaskCompletion(true);
+            TaskBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B1DE7E"));
+        }
 
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateTaskCompletion(false);
+            TaskBorder.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void UpdateTaskCompletion(bool isCompleted)
+        {
+            var task = this.UserToDoListTasks;
+            var parentDataContext = this.ParentViewModel;
+
+            if (task != null && parentDataContext != null)
+            {
+                task.isCompleted = isCompleted;
+                parentDataContext.UpdateTask(task);
             }
         }
     }

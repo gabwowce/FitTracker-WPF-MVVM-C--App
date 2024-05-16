@@ -1,4 +1,5 @@
-﻿using FitTracker.ViewModels;
+﻿using FitTracker.Models;
+using FitTracker.ViewModels;
 using FitTracker.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace FitTracker.Views
         private Frame mainFrame;
         private PageFactory pageFactory;
         private MenuBarViewModel menuBarViewModel;
-        
+        private ProfileViewModel _viewModel;
 
         public ProfilePage(Frame mainFrame, PageFactory pageFactory, MenuBarViewModel menuBarViewModel)
         {
@@ -35,12 +36,25 @@ namespace FitTracker.Views
             this.mainFrame = mainFrame;
             this.pageFactory = pageFactory;
             this.menuBarViewModel = menuBarViewModel;
-            this.DataContext = menuBarViewModel;
+            /*this.DataContext = menuBarViewModel;*/
 
-
+            _viewModel = new ProfileViewModel(menuBarViewModel, UserSession.UserId);
+            this.DataContext = _viewModel;
 
             AttachEventHandlers();
             
+        }
+
+        private void SaveProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.SaveProfile())
+            {
+                MessageBox.Show("Changes successfully saved");
+            }
+            else
+            {
+                MessageBox.Show("Username already exists.");
+            }
         }
 
         private void AttachEventHandlers()

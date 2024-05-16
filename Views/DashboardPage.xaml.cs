@@ -3,6 +3,7 @@ using FitTracker.ViewModels;
 using FitTracker.Views.UserControls;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using static FitTracker.ViewModels.MenuBarViewModel;
 
 namespace FitTracker.Views
 {
@@ -22,7 +23,9 @@ namespace FitTracker.Views
             this.menuBarViewModel = menuBarViewModel;
             int userId = UserSession.UserId;
 
-            var viewModel = new DashboardViewModel(menuBarViewModel,userId);
+            menuBarViewModel.SetActivePage(ActivePage.Dashboard);
+
+            var viewModel = new DashboardViewModel(menuBarViewModel, userId);
             this.DataContext = viewModel;
 
             AttachEventHandlers();
@@ -50,8 +53,9 @@ namespace FitTracker.Views
             var viewModel = this.DataContext as DashboardViewModel;
             if (viewModel != null)
             {
-                System.Diagnostics.Debug.Write("---------->Saved<-------------");
+                
                 viewModel.SaveRecord();
+                TaskTextBox.Clear();
             }
         }
     }

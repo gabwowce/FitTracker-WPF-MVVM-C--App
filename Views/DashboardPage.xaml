@@ -16,11 +16,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <userControls:MenuBar x:Name="barMenu" Grid.Column="0" />
+        <userControls:MenuBar x:Name="barMenu" Grid.Column="0" DataContext="{Binding MenuBar}"/>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="65"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -39,10 +39,10 @@
             </Grid>
 
             <ScrollViewer Grid.Row="2" Margin="59,0,40,20">
-                <ItemsControl x:Name="TaskList" ItemsSource="{Binding TaskCollection}">
+                <ItemsControl x:Name="TaskList" ItemsSource="{Binding ToDoListTasks}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <userControls:ToDoTaskControl/>
+                            <userControls:ToDoTaskControl UserToDoListTasks="{Binding}" ParentViewModel="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Page}}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
