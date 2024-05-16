@@ -60,8 +60,8 @@ namespace FitTracker.ViewModels
         {
             this.UserID = userID;
             MenuBar = menuBarViewModel;
-            
-
+            this.ToDoListTasks = new ObservableCollection<UserToDoListTasks>();
+            this.repository = new UserToDoListTasksRepository(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
         }
         public async Task InitializeAsync()
         {
@@ -70,7 +70,7 @@ namespace FitTracker.ViewModels
 
         private async Task LoadToDoListTasks()
         {
-            var repository = new UserToDoListTasksRepository(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
+            
             var toDoListTasks = await repository.GetToDoListTasksAsync(UserSession.UserId);
             ToDoListTasks = new ObservableCollection<UserToDoListTasks>(toDoListTasks);
             OnPropertyChanged(nameof(toDoListTasks));
@@ -80,8 +80,7 @@ namespace FitTracker.ViewModels
         {
             if (task != null)
             {
-                var repository = new DayRecordRepository(ConfigurationManager.ConnectionStrings["MyConnectionToDB"].ConnectionString);
-                repository.DeleteDayRecord(task.TaskID);
+                repository.DeleteToDoTask(task.TaskID);
                 ToDoListTasks.Remove(task);
             }
         }
@@ -89,15 +88,28 @@ namespace FitTracker.ViewModels
         public void SaveRecord()
         {
 
+            if (CurrentUserToDoListTask == null)
+            {
+                CurrentUserToDoListTask = new UserToDoListTasks();
+            }
+
             CurrentUserToDoListTask.UserID = this.UserID;
             CurrentUserToDoListTask.Task = this.Task;
             CurrentUserToDoListTask.isCompleted = this.isCompleted;
-            
 
+            repository.AddTask(CurrentUserToDoListTask, this.UserID);
 
-            repository.AddTask(CurrentUserToDoListTask, UserID);
+            OnPropertyChanged(nameof(CurrentUserToDoListTask));
+            ToDoListTasks.Add(CurrentUserToDoListTask);  
+        }
 
-            OnPropertyChanged("CurrentUserToDoListTask");
+        public void UpdateTask(UserToDoListTasks task)
+        {
+            if (task != null)
+            {
+                repository.UpdateTask(task);
+                OnPropertyChanged(nameof(ToDoListTasks));
+            }
         }
 
 
